@@ -187,7 +187,7 @@ export default function App() {
 
   useEffect(() => {
     Promise.all([
-      fetch("/players.json").then((r) => r.json()),
+      fetch(import.meta.env.BASE_URL + "players.json").then((r) => r.json()),
       fetch(ESPN_URL).then((r) => r.json()),
     ])
       .then(([playerData, espnData]: [PlayerPicks, ESPNResponse]) => {
