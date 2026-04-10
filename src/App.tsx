@@ -175,7 +175,15 @@ function buildFamilyRankings(
     });
 }
 
-const ROUNDS = [1, 2, 3, 4];
+// Only show rounds that have data
+function getActiveRounds(competitors: Competitor[]): number[] {
+  return [1, 2, 3, 4].filter((r) =>
+    competitors.some((c) => {
+      const ls = c.linescores.find((l) => l.period === r);
+      return ls && ls.value !== undefined;
+    })
+  );
+}
 
 export default function App() {
   const [picks, setPicks] = useState<PlayerPicks | null>(null);
@@ -211,6 +219,7 @@ export default function App() {
 
   const pickerMap = buildPickerMap(picks, competitors);
   const familyRankings = buildFamilyRankings(picks, competitors);
+  const activeRounds = getActiveRounds(competitors);
 
   return (
     <div className="app">
@@ -242,7 +251,7 @@ export default function App() {
                 <th>Player</th>
                 <th>Picked By</th>
                 <th>Total</th>
-                {ROUNDS.map((r) => (
+                {activeRounds.map((r) => (
                   <th key={r}>R{r}</th>
                 ))}
                 <th>Thru</th>
@@ -255,10 +264,13 @@ export default function App() {
                 return (
                   <tr key={c.athlete.displayName} className={picker ? "picked" : ""}>
                     <td className="pos">{c.status.position.displayName}</td>
-                    <td className="golfer-name">{c.athlete.displayName}</td>
+                    <td className="golfer-name">
+                      <span className="full-name">{c.athlete.displayName}</span>
+                      <span className="short-name">{c.athlete.shortName}</span>
+                    </td>
                     <td className="picker">{picker ?? ""}</td>
                     <td className={`score ${scoreClass(scoreToPar)}`}>{scoreToPar}</td>
-                    {ROUNDS.map((r) => {
+                    {activeRounds.map((r) => {
                       const rs = getRoundScore(c, r);
                       return (
                         <td key={r} className={`score ${scoreClass(rs)}`}>

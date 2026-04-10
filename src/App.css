@@ -219,8 +219,18 @@ nav button:hover:not(.active) {
   overflow-x: auto;
 }
 
+.short-name {
+  display: none;
+}
+
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+  .full-name {
+    display: none;
+  }
+  .short-name {
+    display: inline;
+  }
   header h1 {
     font-size: 22px;
   }
@@ -234,6 +244,24 @@ nav button:hover:not(.active) {
   .leaderboard-table td,
   .standings-table th,
   .standings-table td {
-    padding: 8px 6px;
+    padding: 6px 4px;
+  }
+
+  .leaderboard-table td.golfer-name,
+  .standings-table td.golfer-name,
+  .standings-table td.member-name {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .leaderboard-table .round-col,
+  .standings-table .other-picks {
+    font-size: 11px;
+  }
+
+  .other-pick {
+    margin-right: 6px;
   }
 }
