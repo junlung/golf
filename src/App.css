@@ -1,0 +1,239 @@
+:root {
+  --masters-green: #006747;
+  --masters-dark: #004d35;
+  --masters-light: #e8f5e9;
+  --masters-yellow: #f2c94c;
+  --gold: #c8a951;
+  --bg: #fafaf7;
+  --card-bg: #ffffff;
+  --text: #333;
+  --text-muted: #777;
+  --border: #e0e0d8;
+  --under-par: #006747;
+  --over-par: #b71c1c;
+  --even-par: #555;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+}
+
+/* Loading / Error */
+.loading,
+.error {
+  text-align: center;
+  padding: 80px 20px;
+  font-size: 18px;
+  color: var(--text-muted);
+}
+.error {
+  color: var(--over-par);
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 32px 0 24px;
+}
+
+header h1 {
+  font-size: 28px;
+  color: var(--masters-green);
+  letter-spacing: 0.5px;
+}
+
+.event-name {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+nav button {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 20px;
+  border: 1.5px solid var(--masters-green);
+  background: white;
+  color: var(--masters-green);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+nav button.active {
+  background: var(--masters-green);
+  color: white;
+}
+
+nav button:hover:not(.active) {
+  background: var(--masters-light);
+}
+
+/* Shared table styles */
+.leaderboard-table,
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.leaderboard-table thead,
+.standings-table thead {
+  background: var(--masters-green);
+  color: white;
+}
+
+.leaderboard-table th,
+.standings-table th {
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.leaderboard-table th:nth-child(2),
+.standings-table th:nth-child(2),
+.standings-table th:nth-child(3),
+.standings-table th:nth-child(6) {
+  text-align: left;
+}
+
+.leaderboard-table td,
+.standings-table td {
+  padding: 10px 10px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.leaderboard-table td.golfer-name,
+.standings-table td.golfer-name {
+  text-align: left;
+  font-weight: 500;
+}
+
+.leaderboard-table td.pos,
+.standings-table td.pos {
+  color: var(--text-muted);
+  font-size: 13px;
+  min-width: 40px;
+}
+
+.leaderboard-table td.thru {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Score colors */
+.leaderboard-table .score.under,
+.standings-table .score.under {
+  color: var(--under-par);
+  font-weight: 600;
+}
+
+.leaderboard-table .score.over,
+.standings-table .score.over {
+  color: var(--over-par);
+}
+
+.leaderboard-table .score.even,
+.standings-table .score.even {
+  color: var(--even-par);
+}
+
+/* Picked rows on leaderboard */
+.leaderboard-table tr.picked {
+  background: var(--masters-light);
+}
+
+.leaderboard-table td.picker {
+  font-weight: 600;
+  color: var(--masters-green);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Standings table */
+.standings {
+  overflow-x: auto;
+}
+
+.standings-table td.rank {
+  font-weight: 600;
+  color: var(--masters-dark);
+}
+
+.standings-table td.member-name {
+  text-align: left;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.standings-table td.other-picks {
+  text-align: left;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.other-pick {
+  display: inline-block;
+  margin-right: 12px;
+  white-space: nowrap;
+}
+
+.other-pick .score {
+  font-size: 12px;
+}
+
+/* Leaderboard */
+.leaderboard {
+  overflow-x: auto;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 22px;
+  }
+
+  .leaderboard-table,
+  .standings-table {
+    font-size: 12px;
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td,
+  .standings-table th,
+  .standings-table td {
+    padding: 8px 6px;
+  }
+}
